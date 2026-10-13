@@ -104,22 +104,12 @@ jobs:
       - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v4.0.0
-          name: "ServerControl v4.0 (RCON & ngrok Edition)"
+          tag_name: v5.0.0
+          name: "ServerControl v5.0 (Dual Console Edition)"
           body: |
-            ## 🎮 ServerControl v4.0 (RCON & ngrok Edition)
-
-            ### 💻 Для компьютера (Windows):
-            * Скачайте **`ServerAgent.exe`** и запустите. Команды теперь передаются напрямую в движок через RCON!
-
-            ### 📱 Для телефона (Android):
-            * Скачайте **`ServerControl.apk`** и установите себе и другу на телефон.
-
-            ### ⚡ Что нового:
-            * Прямой сетевой протокол RCON (команды `op`, `tick stop`, `stop` выполняются мгновенно)
-            * Автоматический обход экрана предупреждений ngrok через мобильный интернет
-            * Сервер открывается в отдельном видимом окне
-            * Живой стриминг логов из `logs/latest.log`
+            Готовые файлы:
+            * ServerAgent.exe (Windows) — интерактивная живая консоль на ПК
+            * ServerControl.apk (Android) — приложение для вас и друга
           files: |
             ./release-files/**/ServerAgent.exe
             ./release-files/**/ServerControl.apk
