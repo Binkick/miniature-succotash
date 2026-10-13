@@ -66,6 +66,14 @@ jobs:
       - name: Build APK
         run: |
           cd mobile
+          rm -rf android
+          flutter create --org com.servercontrol --platforms=android --project-name server_control .
+          python3 -c "
+          p = 'android/app/src/main/AndroidManifest.xml'
+          content = open(p).read()
+          content = content.replace('<application', '<uses-permission android:name=\"android.permission.INTERNET\"/>\n    <application android:usesCleartextTraffic=\"true\"')
+          open(p, 'w').write(content)
+          "
           flutter pub get
           flutter build apk --release
           cp build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ServerControl.apk
@@ -103,7 +111,7 @@ jobs:
             * ServerAgent.exe (Windows)
             * ServerControl.apk (Android)
           files: |
-            ./release-files/ServerAgent.exe
-            ./release-files/ServerControl.apk
+            ./release-files/**/ServerAgent.exe
+            ./release-files/**/ServerControl.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
