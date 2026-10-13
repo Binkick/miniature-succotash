@@ -69,10 +69,16 @@ jobs:
           rm -rf android
           flutter create --org com.servercontrol --platforms=android --project-name server_control .
           python3 -c "
-          p = 'android/app/src/main/AndroidManifest.xml'
-          content = open(p).read()
+          p = 'lib/screens/console_screen.dart'
+          c = open(p).read()
+          c = c.replace('const Icons.refresh,', 'const Icon(Icons.refresh),')
+          c = c.replace('const Icons.copy,', 'const Icon(Icons.copy),')
+          open(p, 'w').write(c)
+
+          m = 'android/app/src/main/AndroidManifest.xml'
+          content = open(m).read()
           content = content.replace('<application', '<uses-permission android:name=\"android.permission.INTERNET\"/>\n    <application android:usesCleartextTraffic=\"true\"')
-          open(p, 'w').write(content)
+          open(m, 'w').write(content)
           "
           flutter pub get
           flutter build apk --release
